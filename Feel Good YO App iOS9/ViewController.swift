@@ -13,10 +13,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var lblMotivationalQuote: UILabel!
     @IBOutlet weak var btnAnotherQuoteOUTLET: UIButton!
     
-    var quote = ["You can get it done!", "I beleive in you!", "Carpe Diem"]
+    var quoteArray = ["You can get it done!", "I beleive in you!", "Carpe Diem", "You're super duper"]
     var numberQuote = 0
     var buttonText = ["Quote ME", "Inspire Me", "Get it done"]
     var buttonNumber = 0
+    var numCheck = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,16 +35,28 @@ class ViewController: UIViewController {
     }
     
     func selectQuote(){
+        numberQuote = Int(arc4random_uniform(4))
+        if numberQuote == numCheck {
+            numberQuote = Int(arc4random_uniform(4))
+            if numberQuote == numCheck && numberQuote != 0 {
+                numberQuote = 0
+            } else {
+                numberQuote = 1
+            }
+        }
+        
         printQuote()
-    
+        numCheck = numberQuote
     }
 
     func printQuote(){
+        lblMotivationalQuote.text = "\(quoteArray[numberQuote])"
     
     }
     
     func changeButtonText(){
-    
+        buttonNumber = Int(arc4random_uniform(3))
+        btnAnotherQuoteOUTLET.setTitle("\(buttonText[buttonNumber])", forState: UIControlState.Normal)
     }
 }
 
